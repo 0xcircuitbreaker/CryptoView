@@ -29,4 +29,22 @@ const TransactionsSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Transactions", TransactionsSchema);
+const GetTransactionsSchema = new Schema({
+  address: String,
+  from: String,
+  to: String,
+  value: String,
+  gas: String,
+  gasPrice: String,
+  hash: String,
+  blockNumber: Number,
+  timeStamp: Number,
+});
+
+const TransactionModel = mongoose.model("Transaction", TransactionsSchema);
+const GetTransactionModel = mongoose.model("GetTransaction", GetTransactionsSchema);
+
+module.exports = {
+  TransactionModel,
+  GetTransactionModel,
+};

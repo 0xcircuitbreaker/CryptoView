@@ -2,15 +2,19 @@ const express = require("express");
 const {
   createTransaction,
   getTransactions,
+  getTransactionsByAddress,
+  getTokenBalance,
 } = require("../controllers/transactionsController.js");
 const requireAuth = require("../middleware/requireAuth.js");
 
 const router = express.Router();
 
-router.use(requireAuth);
+router.post("/", requireAuth, createTransaction);
 
-router.post("/", createTransaction);
+router.get("/", requireAuth, getTransactions);
 
-router.get("/", getTransactions);
+router.get("/address/:address", getTransactionsByAddress);
+
+router.get("/balance/:address/:contractAddress", getTokenBalance);
 
 module.exports = router;
